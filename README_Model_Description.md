@@ -21,14 +21,14 @@ This repository implements two different lightweight deep learning architectures
 
 ## 1. Problem Description
 
-Multirotor UAVs are vulnerable to actuator and sensor faults that can degrade performance or lead to loss of control. Early detection of these faults, and estimation of their severity, is critical for safe and robust operation.
+Multirotor UAVs are susceptible to actuator and sensor faults that can compromise performance or result in loss of control. Early detection of these faults and estimation of their severity is critical for safe and robust operation.
 
 This repository focuses on:
 
 1. **Classifying** discretized fault magnitudes (e.g., 5%, 10%, 15%, …) for single and double motor faults using CLFDNet.
 2. **Estimating** fault severity continuously by modeling normal behavior and measuring reconstruction error using AELMFNet.
 
-The models work on **time windows of UAV telemetry**, such as attitude, angular rates, accelerations, motor commands, and related signals.
+The models operate on **time windows of UAV telemetry**, including attitude, angular rates, accelerations, motor commands, and related signals.
 
 ---
 
@@ -46,7 +46,7 @@ Each input window contains a short segment of UAV telemetry, typically covering 
 - Motor outputs: `m1, m2, m3, m4`
 - Time or index feature
 
-All features are **z-score normalized**. Windows are centered around fault onset so that both pre-fault and post-fault behavior are captured.
+All features are **z-score normalized**. Windows are centered around fault onset, allowing for the capture of both pre-fault and post-fault behavior.
 
 Two views of the same window are used as inputs:
 
@@ -76,7 +76,7 @@ The CNN branch is designed to capture **local temporal patterns** and fault sign
   - One path with kernel size 3 and 64 filters.
 - Each Conv1D block:
   - Uses ReLU activation.
-  - Is followed by **Global Average Pooling** to reduce the temporal dimension and retain the most informative activations.
+  - It is followed by **Global Average Pooling** to reduce the temporal dimension and retain the most informative activations.
 - The outputs of all six paths are:
   - Concatenated into one **multi-scale feature vector**.
   - Passed through:
